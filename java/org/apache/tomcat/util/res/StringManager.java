@@ -16,6 +16,7 @@
  */
 package org.apache.tomcat.util.res;
 
+import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -138,6 +139,13 @@ public class StringManager {
             str = null;
         }
 
+        if (str != null) {
+            try {
+                str = new String(str.getBytes("ISO-8859-1"), StandardCharsets.UTF_8);
+            } catch (Exception e) {
+
+            }
+        }
         return str;
     }
 
